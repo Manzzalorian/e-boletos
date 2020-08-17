@@ -14,10 +14,10 @@ export function handlerBank(digitableLine: string):Result{
 
     if (digitableLineValid) {
         const fatorVencimento = +(campos[3].slice(0, 4));
-        const amount = +(campos[3].slice(4));
+        const amount = campos[3].slice(4);
         return {
             digitableLineValid: digitableLineValid,
-            amount: amount.toFixed(2),
+            amount: _formatAmount(amount),
             expirationDate: getVencimento(fatorVencimento),
             barCode: _formatBarCodeNumberWithDV(_barcode, DV[3])
         };
@@ -28,7 +28,11 @@ export function handlerBank(digitableLine: string):Result{
         };
     }
 }
-
+function _formatAmount(amount:string):string{
+    let amountText = ''
+    amountText = +amount.slice(0,8)+'.'+amount.slice(8);
+    return amountText
+  }
 function _formatBarcodeNumberWithoutDV(campos: string[]): string {
     let boletoNumber = campos[0].slice(0, 4) + campos[3] + campos[0].slice(4, 9) + campos[1] + campos[2];
     return boletoNumber;

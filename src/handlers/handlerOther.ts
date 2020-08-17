@@ -16,8 +16,8 @@ export function handlerOther(digitableLine: string):Result {
   const _val3 = digitableLine.slice(35, 36);
   const _val4 = digitableLine.slice(47, 48);
   
-  const _DV = digitableLine.slice(2, 3);
-
+  const _DV = digitableLine.slice(3, 4);
+  
   const _indValorReferencia = +digitableLine.slice(2, 3);
   if (_indValorReferencia == 8 || _indValorReferencia == 9) modulo = 11;
 
@@ -29,11 +29,11 @@ export function handlerOther(digitableLine: string):Result {
 
   if (digitableLineValid) {
     const barcode = _formatBarCodeNumberWithDV(_barcode, _DV);
-    const amount = +(barcode.slice(4, 14));
+    const amount = barcode.slice(4, 15);
 
     return {
       digitableLineValid: digitableLineValid,
-      amount: amount.toFixed(2),
+      amount: _formatAmount(amount),
       barCode: barcode
     };
 
@@ -49,6 +49,11 @@ function _getDigitVerify(string: string, modulo: Number): Number {
   } else {
     return getDigitVerifyMod11(string, BoletoType.OTHER)
   }
+}
+function _formatAmount(amount:string):string{
+  let amountText = ''
+  amountText = +amount.slice(0,9)+'.'+amount.slice(9);
+  return amountText
 }
 
 function _formatBarcodeNumberWithoutDV(campo1: string, campo2: string, campo3: string, campo4: string): string {
