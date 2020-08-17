@@ -1,6 +1,5 @@
 import express from 'express';
 import { BoletoType } from '../models/boletoType';
-import e from 'express';
 
 export function boletoValidator(request: express.Request, response: express.Response, next: express.NextFunction) {
     if (request.query.digitableLine && request.query.digitableLine != null) {
