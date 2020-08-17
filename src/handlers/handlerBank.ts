@@ -1,8 +1,8 @@
 import { getDigitVerifyMod10, getDigitVerifyMod11 } from '../modulo/calcModulo';
 import { getVencimento } from '../modulo/getVencimento';
-import { BoletoType } from '../models/boletoType';
+import { BoletoType, Result } from '../models/boletoType';
 
-export function handlerBank(digitableLine: string) {
+export function handlerBank(digitableLine: string):Result{
     const campos: string[] = [digitableLine.slice(0, 9), digitableLine.slice(10, 20), digitableLine.slice(21, 31), digitableLine.slice(33, 47)];
     const DV: number[] = [+digitableLine.slice(9, 10), +digitableLine.slice(20, 21), +digitableLine.slice(31, 32), +digitableLine.slice(32, 33)];
 

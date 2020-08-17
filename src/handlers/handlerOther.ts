@@ -1,7 +1,7 @@
 import { getDigitVerifyMod10, getDigitVerifyMod11 } from '../modulo/calcModulo';
-import { BoletoType } from '../models/boletoType';
+import { BoletoType, Result } from '../models/boletoType';
 
-export function handlerOther(digitableLine: string) {
+export function handlerOther(digitableLine: string):Result {
   let modulo: number = 10;
 
   const _campo1 = digitableLine.slice(0, 11);
@@ -22,10 +22,8 @@ export function handlerOther(digitableLine: string) {
   if (_indValorReferencia == 8 || _indValorReferencia == 9) modulo = 11;
 
   const digitableLineValid = (
-    _getDigitVerify(_campo1, modulo) == +_val1 &&
-    _getDigitVerify(_campo2, modulo) == +_val2 &&
-    _getDigitVerify(_campo3, modulo) == +_val3 &&
-    _getDigitVerify(_campo4, modulo) == +_val4 &&
+    _getDigitVerify(_campo1, modulo) == +_val1 && _getDigitVerify(_campo2, modulo) == +_val2 &&
+    _getDigitVerify(_campo3, modulo) == +_val3 && _getDigitVerify(_campo4, modulo) == +_val4 &&
     _getDigitVerify(_barcode, modulo) == +_DV
   );
 
