@@ -1,4 +1,5 @@
 import { getDigitVerifyMod10, getDigitVerifyMod11 } from '../modulo/calcModulo';
+import { BoletoType } from '../models/boletoType';
 
 export function handlerOther(digitableLine: string) {
   let modulo: number = 10;
@@ -14,6 +15,7 @@ export function handlerOther(digitableLine: string) {
   const _val2 = digitableLine.slice(23, 24);
   const _val3 = digitableLine.slice(35, 36);
   const _val4 = digitableLine.slice(47, 48);
+  
   const _DV = digitableLine.slice(2, 3);
 
   const _indValorReferencia = +digitableLine.slice(2, 3);
@@ -47,7 +49,7 @@ function _getDigitVerify(string: string, modulo: Number): Number {
   if (modulo == 10) {
     return getDigitVerifyMod10(string)
   } else {
-    return getDigitVerifyMod11(string, true)
+    return getDigitVerifyMod11(string, BoletoType.OTHER)
   }
 }
 

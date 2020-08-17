@@ -1,4 +1,4 @@
-
+import { BoletoType } from "../models/boletoType";
 
 export function getDigitVerifyMod10(string: String): Number {
   //const twoOrOne = (num) => ((num % 2) == 0) ? 2 : 1;
@@ -20,7 +20,7 @@ export function getDigitVerifyMod10(string: String): Number {
   return digit;
 };
 
-export function getDigitVerifyMod11(string: String, zeroAllowed: boolean = false): Number {
+export function getDigitVerifyMod11(string: String, type: BoletoType): Number {
   let multiplier = 2;
   let sum = 0;
   let digit;
@@ -30,14 +30,17 @@ export function getDigitVerifyMod11(string: String, zeroAllowed: boolean = false
     sum = sum + calc;
   }
 
-  if (zeroAllowed) {
+  //regras conce
+  if (type == BoletoType.OTHER) {
     digit = (sum % 11);
     if ([11, 1].includes(digit)) digit = 0
   }
-  else {
+  //regras Bank
+  if (type == BoletoType.BANK) {
     digit = 11 - (sum % 11);
     if ([11, 0].includes(digit)) digit = 1
   }
+  //regras default
   if (digit == 10) digit = 1
   return digit;
 };

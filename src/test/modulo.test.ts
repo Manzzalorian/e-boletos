@@ -1,6 +1,5 @@
 import { getDigitVerifyMod10, getDigitVerifyMod11 } from "../modulo/calcModulo";
-
-
+import { BoletoType } from "../models/boletoType";
 
 it('Modulo 10 com 9,10,11 characters ', () => {
 
@@ -26,7 +25,7 @@ it('Modulo 11 com 11 characters ', () => {
     const DV = [0];
 
     DV.forEach((_, i) => {
-        expect(getDigitVerifyMod11(CAMPOS[i], true)).toEqual(DV[i]);
+        expect(getDigitVerifyMod11(CAMPOS[i], BoletoType.OTHER)).toEqual(DV[i]);
     });
 })
 
@@ -34,13 +33,12 @@ it('Modulo 11 com 43 characters padrao BB', () => {
     const CAMPOS = "0019373700000001000500940144816060680935031";
     const DV = 3;
 
-    expect(getDigitVerifyMod11(CAMPOS)).toEqual(DV);
+    expect(getDigitVerifyMod11(CAMPOS,BoletoType.BANK)).toEqual(DV);
 })
 
 it('Modulo 11 com 43 characters padrao FEB', () => {
     const CAMPOS = "8220000215048200974123220154098290108605940";
     const DV = 0;
-    const BOO = true;
 
-    expect(getDigitVerifyMod11(CAMPOS, BOO)).toEqual(DV);
+    expect(getDigitVerifyMod11(CAMPOS, BoletoType.OTHER)).toEqual(DV);
 })
